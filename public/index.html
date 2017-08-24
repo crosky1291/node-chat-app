@@ -8,5 +8,20 @@
 </head>
 <body>
   welcome to the chat app
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io(); //makes a request from the client to the server to open a websocket
+
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconected from server");
+    });
+
+
+  </script>
 </body>
 </html>
