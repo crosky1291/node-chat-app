@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": { //engines tell heroku which version of node to use.
+  "engines": {
     "node": "8.2.1"
   },
   "author": "Yandri Sanchez",
