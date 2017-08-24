@@ -1,0 +1,18 @@
+{
+  "name": "node-chat-app",
+  "version": "1.0.0",
+  "description": "a chatt application mainly using node and socket.io",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": { //engines tell heroku which version of node to use.
+    "node": "8.2.1"
+  },
+  "author": "Yandri Sanchez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
