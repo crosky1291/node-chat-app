@@ -10,13 +10,15 @@ socket.on("disconnect", function() {
 });
 
 socket.on("newMessage", function(message) {
+  let timeStamp = moment(message.createdAt).format("h:mm a");
   let ol = $("#message-display");
-  let li = $(`<li>${message.from}: ${message.text}</li>`);
+  let li = $(`<li>${message.from} ${timeStamp}: ${message.text}</li>`);
   ol.append(li);
 });
 
 socket.on("newLocationMessage", function(message) {
-  let li = $(`<li>${message.from}: </li>`);
+  let timeStamp = moment(message.createdAt).format("h:mm a");
+  let li = $(`<li>${message.from} ${timeStamp}: </li>`);
   let a = $(`<a href=${message.url} target="_blank">My Current Location</a>`);
   li.append(a);
   $("#message-display").append(li);
