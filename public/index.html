@@ -6,20 +6,39 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-  welcome to the chat app
+  <div class="container-fluid">
+    <div class="row">
+      
+      <div id="users" class="section-left col-sm-2">
+        <section>
+            <h2>People</h2>
+        </section>
+      </div>
+      
+      <div class="section-right col-sm-10 no-padding-left-right">
+        <section id="messages">
+          <ol id="message-display"></ol>
+        </section>         
+        
+        <section id="form-section">
+          <form id="message-form">
+              <input type="text" name="message" placeholder="Message.." autofocus autocomplete="off"/>
+              <button>Send</button>
+          </form>
+          <button id="send-location">Send Location</button>
+        </section>
+      </div>
 
-  <ol id="message-display"></ol>
-
-
-  <form id="message-form">
-    <input type="text" name="message" placeholder="Your Message..."/>
-    <button>Send</button>
-  </form>
-  <button id="send-location">Send Location</button>
-
+    </div>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/index.js"></script>
 </body>

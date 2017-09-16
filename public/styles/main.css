@@ -1,0 +1,76 @@
+
+#users {
+  background-image: url("../images/users_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+
+}
+
+#users>section>h2 {
+  text-align: center;
+}
+
+
+.section-right,
+.section-left {
+  height: 100vh;
+}
+
+#form-section {
+  background-color: #CCD5D9;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 0 8px 8px;
+}
+
+.no-padding-left-right {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#message-form {
+  display: inline;
+}
+
+input[name="message"] {
+  width: 70%;
+  padding: 5px;
+}
+
+input[name="message"],
+form>button,
+#send-location {
+  height: 35px;
+}
+
+form>button,
+button[id="send-location"] {
+  background-color: #476FA6;
+  border: none;
+  color: white;
+  
+  padding: 0 10px;
+}
+
+form>button {
+  margin: 0 8px;
+}
+
+#messages {
+  margin-top: 20px;
+}
+
+#message-display {
+  margin-left: 10px;
+  padding: 0;
+}
+
+ol {
+  list-style: none;
+}
+
+button[disabled=disabled] {
+  background-color: #7F8995;
+}

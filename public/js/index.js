@@ -15,6 +15,13 @@ socket.on("newMessage", function(message) {
   ol.append(li);
 });
 
+socket.on("newLocationMessage", function(message) {
+  let li = $(`<li>${message.from}: </li>`);
+  let a = $(`<a href=${message.url} target="_blank">My Current Location</a>`);
+  li.append(a);
+  $("#message-display").append(li);
+});
+
 $("#message-form").on("submit", function(e) {
   e.preventDefault();
 
@@ -31,12 +38,16 @@ locationButton.on("click", function() {
     return alert("Your browser does not support Locations Services");
   }
 
+  locationButton.attr("disabled", "disabled").text("Sending Location...");
+
   navigator.geolocation.getCurrentPosition(function(position) {
+    locationButton.removeAttr("disabled").text("Send Location");
     socket.emit("createLocationMessage", {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     });
   }, function() {
+    locationButton.removeAttr("disabled").text("Send Location");
     return alert("Could not fetch position");
   });
 });
