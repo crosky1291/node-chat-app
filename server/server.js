@@ -23,12 +23,14 @@ io.on("connection", (socket) => {
   socket.emit("newMessage", generateMessage("Admin", "Welcome to the chat app"));
   socket.broadcast.emit("newMessage", generateMessage("Admin", "New User Has Joined"));
 
-  socket.on("createMessage", (message) => {
+  socket.on("createMessage", (message, callback) => {
     io.emit("newMessage", generateMessage(message.from, message.text));
+    callback();
   });
 
-  socket.on("createLocationMessage", (coords) => {
-    io.emit("newLocationMessage", generateLocationMessage("Admin", coords.latitude, coords.longitude));
+  socket.on("createLocationMessage", (coords, callback) => {
+    io.emit("newLocationMessage", generateLocationMessage("User", coords.latitude, coords.longitude));
+    callback();
   });
 
 });
