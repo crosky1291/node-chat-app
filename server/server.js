@@ -59,20 +59,6 @@ function readFiles(dirname, onFileContent, onError, callback) {
 
 
 
-// app.get("/hello", function(req, res) {
-  let data = [];
-  fs.readdir(`${publicPath}/images/smileys/`, (err, files) => {
-    files.forEach(file => {
-      var fileEdit = file.replace(/\.png/g,"")
-      data.push(fileEdit);
-    });
-
-    console.log(data);
-  });
-// });
-
-
-
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
