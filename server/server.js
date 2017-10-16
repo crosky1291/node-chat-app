@@ -1,4 +1,5 @@
 const path = require("path");
+var fs = require('fs');
 const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
@@ -34,6 +35,41 @@ io.on("connection", (socket) => {
   });
 
 });
+
+
+function readFiles(dirname, onFileContent, onError, callback) {
+  fs.readdir(dirname, function(err, filenames) {
+    if (err) {
+      onError(err);
+      return;
+    }
+    filenames.forEach(function(filename) {
+      fs.readFile(dirname + filename, 'utf-8', function(err, content) {
+        if (err) {
+          onError(err);
+          return;
+        }
+        onFileContent(filename, content);
+      });
+    });
+
+    callback();
+  });
+}
+
+
+
+// app.get("/hello", function(req, res) {
+  let data = [];
+  fs.readdir(`${publicPath}/images/smileys/`, (err, files) => {
+    files.forEach(file => {
+      var fileEdit = file.replace(/\.png/g,"")
+      data.push(fileEdit);
+    });
+
+    console.log(data);
+  });
+// });
 
 
 

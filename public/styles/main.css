@@ -1,25 +1,83 @@
 
 #users {
-  background-image: url("../images/users_bg.jpg");
-  background-size: cover;
-  background-position: center;
-  color: white;
-
+  background-color: #fff;
+  color: #0943E8;
+  border-right: 1px solid #aaa;
+  font-weight: normal;
 }
 
-#users>section>h2 {
+#users>section>h3 {
   text-align: center;
 }
-
 
 .section-right,
 .section-left {
   height: 100vh;
 }
 
-#form-section {
-  background-color: #CCD5D9;
+
+/* MESSAGES */
+
+#messages {
+  background-image: url("../images/chatbg.jpg");
+  background-size: fill;
+  height: 100%;
+  padding-top: 20px;
+}
+
+#message-display {
+  margin-left: 10px;
+  padding: 0;
+}
+
+ol {
+  list-style: none;
+}
+
+ol>li {
+  margin-top: 2px;
+}
+
+.message_title h4 {
+  margin: 0;
+}
+.message_body {
+  position: relative;
+}
+
+.message_body p {
+  margin-bottom: 2px;
+}
+
+.message-wrap {
+  display: inline-block;
+  padding: 5px 20px 20px 10px;
+  border-radius: 10px;
+}
+
+.chat-me {
+  background-color: #D0FFBD;
+}
+
+.chat-others {
+  background-color: #fff;
+}
+
+.created_at {
+  color: #bbb;
+  font-size: 10px;
   position: absolute;
+  right: -10px;
+}
+
+
+
+/* SEND-SECTION */
+
+#form-section {
+  background-color: #efefef;
+  position: absolute;
+  border-top: 1px solid #aaa;
   bottom: 0;
   width: 100%;
   padding: 8px 0 8px 8px;
@@ -35,9 +93,64 @@
 }
 
 input[name="message"] {
-  width: 70%;
-  padding: 5px;
+  padding: 0 10px;
+  width: calc(100% - 40px);
+  border: none;
+  outline: none;
+  caret-color: #0943E8;
+  border-radius: 15px;
+  font-size: 16px;
+  line-height: 35px;
 }
+
+
+
+#input-holder {
+  width: 70%;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  border-radius: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+#input-holder i {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  font-size: 25px;
+  color: #FFB900;
+  cursor: pointer;
+}
+
+
+
+
+#emojis {
+  position: relative;
+}
+
+.emoji {
+  width: 27px;
+  height: 27px;
+  margin: 3px;
+}
+
+#emoji-container {
+  position: absolute;
+  height: 125px;
+  width: 280px;
+  top: -165px;
+  left: -50px;
+  border: 1px solid #000;
+  overflow-y: scroll;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  background-color: #eee;
+  display: none;
+}
+
 
 input[name="message"],
 form>button,
@@ -47,10 +160,10 @@ form>button,
 
 form>button,
 button[id="send-location"] {
-  background-color: #476FA6;
+  background-color: #0943E8;;
   border: none;
   color: white;
-  
+  border-radius: 10px;
   padding: 0 10px;
 }
 
@@ -58,19 +171,29 @@ form>button {
   margin: 0 8px;
 }
 
-#messages {
-  margin-top: 20px;
+
+.testt {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  height: 35px;
+  padding: 5px 10px;
+  width: calc(100% - 40px);
+  border: none;
+  outline: none;
+  caret-color: #0943E8;
+  border-radius: 15px;
+  font-size: 16px;
 }
 
-#message-display {
-  margin-left: 10px;
-  padding: 0;
+.testt>img {
+  width: 16px;
+  height: 16px;
+  margin: 0 1px;
 }
 
-ol {
-  list-style: none;
-}
+
 
 button[disabled=disabled] {
   background-color: #7F8995;
 }
+

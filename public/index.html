@@ -6,9 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 
+
+  <script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emojione@3.1.2/extras/css/emojione.min.css"/>
+
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
+
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -22,10 +29,9 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      
       <div id="users" class="section-left col-sm-2">
         <section>
-            <h2>People</h2>
+            <h3>Participants</h3>
         </section>
       </div>
       
@@ -36,7 +42,20 @@
         
         <section id="form-section">
           <form id="message-form">
-              <input type="text" name="message" placeholder="Message.." autofocus autocomplete="off"/>
+            <div id="input-holder">
+              <input id="hellow" type="text" name="message" placeholder="Message.." autofocus autocomplete="off"/>
+              <!-- <div id="emojis"> -->
+                <!-- <div contenteditable="true" autofocus class="testt"></div> -->
+                <!-- <textarea contenteditable="true" autofocus class="testt">&#9996;</textarea> -->
+                <i id="smiley" class="fa fa-smile-o" aria-hidden="true">
+                  <div id="emojis">
+                      <div id="emoji-container">
+                      </div>
+                  </div>
+                   
+                </i>
+              <!-- </div> -->
+            </div>
               <button>Send</button>
           </form>
           <button id="send-location">Send Location</button>
@@ -48,12 +67,14 @@
 
   <script id="message-template" type="text/template">
     <li>
-      <div class="message_title">
-        <h4>{{from}}</h4>
-        <span>{{createdAt}}</span>
-      </div>
-      <div class="message_body">
-        <p>{{text}}</p>
+      <div class="message-wrap {{class}}">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+        </div>
+        <div class="message_body">
+          <p>{{text}}</p>
+          <span class="created_at">{{createdAt}}</span>
+        </div>
       </div>
     </li>
   </script>
