@@ -62,7 +62,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("createLocationMessage", (coords, callback) => {
-    io.emit("newLocationMessage", generateLocationMessage("User", coords.latitude, coords.longitude));
+    var user = users.getUser(socket.id);
+
+    if(user) {
+      io.to(user.room).emit("newLocationMessage", generateLocationMessage(`${user.name}`, coords.latitude, coords.longitude));
+    }
+    
     callback();
   });
 
