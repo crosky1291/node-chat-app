@@ -5,6 +5,8 @@
   border-right: 1px solid #aaa;
   font-weight: normal;
   display: none;
+  padding-right: 0;
+  overflow-y: scroll;
 }
 
 #users>section>h3 {
@@ -27,6 +29,7 @@
   background-size: fill;
   height: 100%;
   padding-top: 20px;
+  overflow-y: scroll;
 }
 
 #message-display {
@@ -230,17 +233,18 @@ body {
   background-color: #efefef;
   background-color: rgba(230, 230, 230, 0.7);
   position: relative;
-	top: 40%;
-  transform: 			translateY(-50%);
+	top: 43%;
+  transform: translateY(-50%);
   padding: 5px 0 30px 0;
   border-radius: 20px;
   margin: 0 auto;
-  display: block;
+  max-width: 400px;
+  box-shadow: -6px 6px 20px #222c1e;
 }
 
 #join-chat h2 {
   text-align: center;
-  color: blue;
+  color: #0943E8;
 }
 
 .form-field {
@@ -262,6 +266,7 @@ body {
 }
 
 #join-room {
+  background-color: #0943E8;
   display: block;
   margin: 0 auto;
   font-size: 20px;
@@ -271,6 +276,59 @@ body {
   cursor: pointer;
   border-radius: 15px;
 }
+
+#usernames {
+  margin: 0;
+  padding: 0;
+  color: #999;
+}
+
+.user:first-child {
+  border-top: 1px solid #aaa;
+  padding-top: 15px;
+}
+
+.user-image {
+  font-size: 40px;
+  color: #999;
+  max-width: 40%;
+ 
+}
+
+.user-right {
+  /* width: 55%; */
+  /* max-width: 60%; */
+}
+
+.user-name {
+  display: inline-block;
+  font-size: 18px;
+  vertical-align: top;
+  position: relative;
+  left: 10px;
+  color: #333;
+}
+
+.user-joinedtime {
+  position: relative;
+  font-size: 12px;
+  left: 26px;
+}
+
+.user-image,
+.user-right {
+  display: inline-block;
+}
+
+.user-line {
+  width: 77%;
+  max-width: 80%;
+  height: 1px;
+  background-color: #bbb;
+  position: absolute;
+  right: 0;
+}
+
 
 
 
@@ -318,6 +376,8 @@ body {
   #send-message:after {
     content: "Send";
   }
+
+  /* index page */
   
 }
 
