@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat | ChatApp</title>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emojione@3.1.2/extras/css/emojione.min.css"/>
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <!-- moment -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+  <!-- mustache -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="users" class="section-left col-md-2 col-sm-3">
+        <section>
+            <h3>Participants</h3>
+        </section>
+      </div>
+      
+      <div class="section-right col-md-10 col-sm-9 no-padding-left-right">
+        <section id="messages">
+          <ol id="message-display"></ol>
+        </section>         
+        
+        <section id="form-section">
+          <form id="message-form">
+            <div id="input-holder">
+              <input id="message-field" type="text" name="message" placeholder="Message.." autofocus autocomplete="off"/>
+              <i id="smiley" class="fa fa-smile-o" aria-hidden="true">
+                <div id="emojis">
+                    <div id="emoji-container">
+                    </div>
+                </div>
+              </i>
+            </div>
+            <button id="send-message"><span class="fa fa-paper-plane"></span></button>
+          </form>
+          <button id="send-location"><span class="fa fa-map-marker"></span></button>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <script id="message-template" type="text/template">
+    <li>
+      <div class="message-wrap {{class}}">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+        </div>
+        <div class="message_body">
+          <p>{{text}}</p>
+          <span class="created_at">{{createdAt}}</span>
+        </div>
+      </div>
+    </li>
+  </script>
+
+  <script id="location-message-template" type="text/template">
+    <li>
+      <div class="message_title">
+        <h4>{{from}}</h4>
+        <span>{{createdAt}}</span>
+      </div>
+      <div class="message_body">
+        <p><a href="{{url}}" target="_blank">My current location</a></p>
+      </div>
+    </li>
+  </script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>
