@@ -41,88 +41,6 @@
                 </div>
                 <div class="user-line"></div>
               </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-
-              <li class="user">
-                <div class="user-image "><i class="fa fa-user-circle"></i></div>
-                <div class="user-right">
-                  <div class="user-name">Yandri</div>
-                  <div class="user-joinedtime">Joined at 12:45 PM</div>
-                </div>
-                <div class="user-line"></div>
-              </li>
-              
             </ol>
         </section>
       </div>
@@ -152,6 +70,17 @@
     </div>
   </div>
 
+  <script id="users-template" type="text/template">
+    <li class="user">
+      <div class="user-image "><i class="fa fa-user-circle"></i></div>
+      <div class="user-right">
+        <div class="user-name">{{name}}</div>
+        <div class="user-joinedtime">Joined at {{joinedAt}}</div>
+      </div>
+      <div class="user-line"></div>
+    </li>
+  </script>
+
   <script id="message-template" type="text/template">
     <li>
       <div class="message-wrap {{class}}">
@@ -178,6 +107,7 @@
     </li>
   </script>
 
+  <script src="/js/libs/deparam.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/chat.js"></script>
 </body>

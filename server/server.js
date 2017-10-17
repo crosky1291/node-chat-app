@@ -5,12 +5,16 @@ const express = require("express");
 const socketIO = require("socket.io");
 const port = process.env.PORT || 3000;
 const { generateMessage, generateLocationMessage } = require("./utils/message");
+const { generateUser } = require("./utils/user");
+const {isRealString} = require("./utils/validation");
+const {Users} = require("./utils/users");
 
 const publicPath = path.join(__dirname, "../public");
 var app = express();
 
 var server = http.createServer(app);
 var io = socketIO(server);
+var users = new Users();
 
 app.use(express.static(publicPath));
 
@@ -19,13 +23,41 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
+    var user = users.removeUser(socket.id);
+
+    if(user) {
+      io.to(user.room).emit("updateUserList", users.getUserList(user.room));
+      io.to(user.room).emit("newMessage", generateMessage("Admin", `${user.name} has left`))
+    }
   });
 
-  socket.emit("newMessage", generateMessage("Admin", "Welcome to the chat app"));
-  socket.broadcast.emit("newMessage", generateMessage("Admin", "New User Has Joined"));
+
+  socket.on("join", (params, callback) => {
+    if(!isRealString(params.name) || !isRealString(params.room)) {
+      return callback("Name and room are required!");
+    }
+
+    let user = generateUser(socket.id, params.name, params.room);
+    socket.join(user.room);
+    users.removeUser(user.id);
+    users.addUser(user);
+
+    io.to(params.room).emit("updateUserList", users.getUserList(user.room));
+
+    socket.emit("newMessage", generateMessage("Admin", "Welcome to the chat app"));
+    socket.broadcast.to(params.room).emit("newMessage", generateMessage("Admin", `${user.name} has joined`));
+
+
+    callback();
+  });
 
   socket.on("createMessage", (message, callback) => {
-    io.emit("newMessage", generateMessage(message.from, message.text));
+    var user = users.getUser(socket.id);
+
+    if(user && isRealString(message.text)) {
+      io.to(user.room).emit("newMessage", generateMessage(user.name, message.text));
+    }
+    
     callback();
   });
 
@@ -33,6 +65,7 @@ io.on("connection", (socket) => {
     io.emit("newLocationMessage", generateLocationMessage("User", coords.latitude, coords.longitude));
     callback();
   });
+
 
 });
 

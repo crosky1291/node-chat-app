@@ -3,6 +3,16 @@ let socket = io(); //makes a request from the client to the server to open a web
 socket.on("connect", function() {
   console.log("Connected to server");
 
+  let params = jQuery.deparam(window.location.search);
+
+  socket.emit("join", params, function(err) {
+    if (err) {
+      alert(err);
+      window.location.href = "/";
+    } else {
+      console.log("everything was ok");
+    }
+  });
 });
 
 socket.on("disconnect", function() {
@@ -34,6 +44,23 @@ socket.on("newLocationMessage", function(message) {
   });
 
   $("#message-display").append(html);
+});
+
+socket.on("updateUserList", function(list) {
+  let userList = $("#usernames");
+  let template = $("#users-template").html();
+
+  userList.empty();
+  list.forEach(function(user) {
+    let timeStamp = moment(user.joinedAt).format("h:mm A");
+
+    let html = Mustache.render(template, {
+      name: user.name,
+      joinedAt: timeStamp
+    });
+
+    userList.append(html);
+  });
 });
 
 
