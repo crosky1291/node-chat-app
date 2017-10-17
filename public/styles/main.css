@@ -4,11 +4,28 @@
   color: #0943E8;
   border-right: 1px solid #aaa;
   font-weight: normal;
+  display: none;
 }
 
 #users>section>h3 {
   text-align: center;
 }
+
+@media only screen and (min-width: 768px) {
+
+  input[name="message"] {
+    padding: 0 10px;
+    width: calc(100% - 40px);
+    border: none;
+    outline: none;
+    caret-color: #0943E8;
+    border-radius: 15px;
+    font-size: 16px;
+    line-height: 35px;
+  }
+
+}
+
 
 .section-right,
 .section-left {
@@ -92,9 +109,10 @@ ol>li {
   display: inline;
 }
 
+
 input[name="message"] {
   padding: 0 10px;
-  width: calc(100% - 40px);
+  width: 100%;
   border: none;
   outline: none;
   caret-color: #0943E8;
@@ -105,8 +123,9 @@ input[name="message"] {
 
 
 
+
 #input-holder {
-  width: 70%;
+  width: calc(100% - 99px);
   border: 1px solid #aaa;
   background-color: #fff;
   border-radius: 15px;
@@ -121,6 +140,26 @@ input[name="message"] {
   font-size: 25px;
   color: #FFB900;
   cursor: pointer;
+  display: none;
+}
+
+#send-location, #send-message {
+  font-size: 16px;
+  border-radius: 50%;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  padding: 0 10px;
+}
+
+#send-message {
+  margin: 0 8px;
+}
+
+#send-message span {
+  position: relative;
+  right: 1px;
+  bottom: 1px;
 }
 
 
@@ -164,11 +203,6 @@ button[id="send-location"] {
   border: none;
   color: white;
   border-radius: 10px;
-  padding: 0 10px;
-}
-
-form>button {
-  margin: 0 8px;
 }
 
 
