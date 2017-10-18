@@ -7,6 +7,7 @@ describe("Users", () => {
 
   beforeEach(() => {
     users = new Users();
+    users.rooms = ["Test1", "Test2"];
     users.users = [{
       id: "1",
       name: "luis",
@@ -30,7 +31,7 @@ describe("Users", () => {
       room: "Test"
     };
 
-    var resUser = users.addUser(user.id, user.name, user.room);
+    var resUser = users.addUser(user);
     expect(users.users).toEqual([user]);
   });
 
@@ -50,23 +51,45 @@ describe("Users", () => {
     expect(users.users.length).toBe(3);
   });
 
-  it("should find user", () => {
+  it("should find user by id", () => {
     var userId = "2";
-    var user = users.getUser(userId);
+    var user = users.getUserById(userId);
 
     expect(user.id).toBe(userId);
   });
 
-  it("should NOT find user", () => {
+  it("should NOT find user by id ", () => {
     var userId = "60";
-    var user = users.getUser(userId);
+    var user = users.getUserById(userId);
 
     expect(user).toNotExist();
   });
 
   it("should return names for Test1", () => {
     var userList = users.getUserList("Test1");
-    expect(userList).toEqual(["luis", "Jacob"]);
+    expect(userList).toEqual([{
+      id: "1",
+      name: "luis",
+      room: "Test1"
+    },
+    {
+      id: "3",
+      name: "Jacob",
+      room: "Test1"
+    }]);
+  });
+
+  it("should return true if name is already in use in a room", () => {
+    var name = "jacob";
+    var room = "Test1";
+
+    expect(users.isNameTaken(name, room)).toBeTruthy();
+  });
+
+  it("should return true if room is already taken", () => {
+    var room = "TESt1";
+
+    expect(users.isRoomTaken(room)).toBeTruthy();
   });
 
 

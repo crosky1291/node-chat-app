@@ -4,8 +4,8 @@ const moment = require("moment");
 let generateUser = (id, name, room) => {
   return {
     id,
-    name,
-    room,
+    name: name,
+    room: room.toLowerCase(),
     joinedAt: moment().valueOf()
   };
 };

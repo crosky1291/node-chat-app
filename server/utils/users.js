@@ -7,6 +7,7 @@
 class Users {
   constructor() {
     this.users = [];
+    this.rooms = [];
   }
 
   addUser(user) {
@@ -14,8 +15,23 @@ class Users {
     return user;
   }
 
+  addRoom(room) {
+    this.rooms.push(room);
+    return room;
+  }
+
+  findRoom(name) {
+    return this.rooms.filter((roomName) => {
+      return roomName.toLowerCase() === name.toLowerCase();
+    })[0];
+  }
+
+  getRoomList() {
+    return this.rooms;
+  }
+
   removeUser(id) {
-    var user = this.getUser(id);
+    var user = this.getUserById(id);
 
     if (user) {
       this.users = this.users.filter((user) => {
@@ -26,16 +42,35 @@ class Users {
     return user;
   }
 
-  getUser(id) {
+  getUserById(id) {
     return this.users.filter((user) => {
       return user.id === id;
     })[0];
   }
 
+  isNameTaken(name, room) {
+    let users = this.getUserList(room);
+    
+    return users.filter((user) => {
+      return user.name.toLowerCase() === name.toLowerCase();
+    })[0];
+
+  }
+
+  isRoomTaken(roomName) {
+    var isTaken = false;
+    this.rooms.forEach(function(room) {
+      if(roomName.toLowerCase() === room.toLowerCase()) isTaken = true;
+    });
+
+    return isTaken;
+  }
+
   getUserList(room) {
     var users = this.users.filter((user) => {
       return user.room === room;
-  });
+    });
+
     return users;
   }
 }

@@ -117,6 +117,7 @@ input[name="message"] {
 
 #input-holder {
   width: calc(100% - 99px);
+  max-width: 600px;
   border: 1px solid #aaa;
   background-color: #fff;
   border-radius: 15px;
@@ -261,7 +262,7 @@ body {
   border: none;
   margin-top: 6px;
   border: 1px solid #aaa;
-  border-radius: 15px;
+  border-radius: 5px;
   caret-color: #0943E8;
 }
 
@@ -274,7 +275,7 @@ body {
   letter-spacing: 2px;
   margin-top: 35px;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 #usernames {
@@ -329,10 +330,19 @@ body {
   right: 0;
 }
 
+select {
+  width: 50%;
+  display: block;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 14px;
+  outline: none;
+  margin-top: 5px;
+}
 
+@media only screen and (min-width: 768px) {
 
-
-
+}
 
 
 
@@ -347,10 +357,9 @@ body {
   }
   
   input[name="message"] {
-    width: calc(100% - 40px);
     caret-color: #0943E8;
     letter-spacing: 1px;
-    line-height: 35px;
+    /* line-height: 35px; */
   }
   
   #input-holder i {
@@ -364,17 +373,12 @@ body {
     font-size: 14px;
   }
 
-  #send-location span,
-  #send-message span {
-    display: none;
-  }
-
-  #send-location:after {
-    content: "Send Location";
-  }
-
   #send-message:after {
     content: "Send";
+  }
+
+  #send-message span {
+    display: none;
   }
 
   /* index page */

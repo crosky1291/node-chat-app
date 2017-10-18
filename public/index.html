@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Join | ChatApp</title>
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -12,14 +15,20 @@
     <h2>Join a Chat</h2>
     <div class="form-field">
       <label for="name">Display name</label>
-      <input type="text" name="name" autofocus />
+      <input type="text" name="name" autofocus autocomplete="off"/>
     </div>
 
-    <div class="form-field">
-      <label for="room">Room name</label>
-      <input type="text" name="room" />
+    <div id="rooms" class="form-field">
+      
+    </div>
+
+    <div id="create-room" class="form-field">
+      <label for="room">Create new room</label>
+      <input type="text" name="room" autocomplete="off"/>
     </div>
     <button id="join-room">Join</button>
   </form>
+
+  <script src="/js/joinRoom.js"></script>
 </body>
 </html>

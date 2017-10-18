@@ -55,13 +55,17 @@ socket.on("updateUserList", function(list) {
     let timeStamp = moment(user.joinedAt).format("h:mm A");
 
     let html = Mustache.render(template, {
-      name: user.name,
+      name: capitalize(user.name),
       joinedAt: timeStamp
     });
 
     userList.append(html);
   });
 });
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 let messageTextbox = $("input[name=message]");
@@ -84,10 +88,20 @@ locationButton.on("click", function() {
     return alert("Your browser does not support Locations Services");
   }
 
-  locationButton.attr("disabled", "disabled").text("Sending Location...");
+
+  locationButton.attr("disabled", "disabled");
+
+  if (window.innerWidth > 768) {
+    locationButton.text("Sending Location...")
+  }
+
   
   navigator.geolocation.getCurrentPosition(function(position) {
-    locationButton.removeAttr("disabled").text("Send Location");
+    locationButton.removeAttr("disabled");
+
+    if (window.innerWidth > 768) {
+      locationButton.text("Send Location")
+    }
     socket.emit("createLocationMessage", {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
@@ -95,32 +109,22 @@ locationButton.on("click", function() {
       messageTextbox.focus();
     });
   }, function() {
-    locationButton.removeAttr("disabled").text("Send Location");
+    locationButton.removeAttr("disabled");
+    
+    if (window.innerWidth > 768) {
+      locationButton.text("Send Location");
+    }
+    
     return alert("Could not fetch position");
   });
 });
-
-// $("#input-holder i").on("click", function() {
-//   console.log("hi");
-// });
-
-// $.get("/hello", function(data) {
-//   console.log(data);
-//   let emojiContainer = $("#emoji-container");
-//   let path = "images/smileys";
-//   data.forEach(function(file) {
-//     let img = $(`<img class="emoji" src=${path}/${file}>`);
-//     emojiContainer.append(img);
-//   });
-// });
 
 
 
 $("#emoji-container").on("click", function(e) {
   let value = $(e.target).html();
-  console.log(value);
   var input = $("#message-field");
-  input.val(input.val() + value).focus();
+  input.val(input.val() + value + " ").focus();
 });
 
 
@@ -163,4 +167,8 @@ $("#smiley").on("click", function(e) {
 
 
 getPeopleEmoji();
+
+if (window.innerWidth > 768) {
+  $("#send-location").removeClass("fa fa-map-marker").text("Send Location");
+}
 

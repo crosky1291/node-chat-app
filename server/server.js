@@ -33,16 +33,39 @@ io.on("connection", (socket) => {
 
 
   socket.on("join", (params, callback) => {
-    if(!isRealString(params.name) || !isRealString(params.room)) {
-      return callback("Name and room are required!");
+    console.log(params);
+    let isJoiningRoom = params.roomToJoin ? true : false;
+    let userRoom = isJoiningRoom ? params.roomToJoin : params.room;
+
+    if (isJoiningRoom) {
+      //check name for real string && check name for people in the room so that its not the same name
+      if(!isRealString(params.name)) {
+        return callback("Name is Required!");
+      } else if (users.isNameTaken(params.name, userRoom)) {
+        return callback("Name is already in use, try again!");
+      }
+
+    } else {
+      if(!isRealString(params.name) || !isRealString(params.room)) {
+        return callback("Name and room are required!");
+      } else if (users.isRoomTaken(userRoom)) {
+        return callback("Room name is already in use, try joining it!");
+      }
     }
 
-    let user = generateUser(socket.id, params.name, params.room);
+
+
+    let user = generateUser(socket.id, params.name, userRoom);
     socket.join(user.room);
+    
     users.removeUser(user.id);
     users.addUser(user);
+    console.log(!users.findRoom(user.room));
+    if (!users.findRoom(user.room)) {
+      users.addRoom(user.room);
+    }
 
-    io.to(params.room).emit("updateUserList", users.getUserList(user.room));
+    io.to(user.room).emit("updateUserList", users.getUserList(user.room));
 
     socket.emit("newMessage", generateMessage("Admin", "Welcome to the chat app"));
     socket.broadcast.to(params.room).emit("newMessage", generateMessage("Admin", `${user.name} has joined`));
@@ -52,7 +75,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("createMessage", (message, callback) => {
-    var user = users.getUser(socket.id);
+    var user = users.getUserById(socket.id);
 
     if(user && isRealString(message.text)) {
       io.to(user.room).emit("newMessage", generateMessage(user.name, message.text));
@@ -62,7 +85,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("createLocationMessage", (coords, callback) => {
-    var user = users.getUser(socket.id);
+    var user = users.getUserById(socket.id);
 
     if(user) {
       io.to(user.room).emit("newLocationMessage", generateLocationMessage(`${user.name}`, coords.latitude, coords.longitude));
@@ -94,6 +117,12 @@ function readFiles(dirname, onFileContent, onError, callback) {
     callback();
   });
 }
+
+
+app.get("/rooms", (req, res) => {
+  let rooms = users.getRoomList();
+  res.send(rooms);
+});
 
 
 
