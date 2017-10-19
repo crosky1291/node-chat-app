@@ -2,7 +2,6 @@ const expect = require("expect");
 const {Users} = require("./users");
 
 describe("Users", () => {
-
   var users;
 
   beforeEach(() => {
@@ -27,49 +26,50 @@ describe("Users", () => {
   });
 
   it("should add new user", () => {
-    var users = new Users();
-    var user = {
+    let users = new Users();
+    let user = {
       id: "123",
       name: "Yandri",
       room: "Test"
     };
+    let resUser = users.addUser(user);
 
-    var resUser = users.addUser(user);
     expect(users.users).toEqual([user]);
   });
 
   it("should remove a user", () => {
-    var userId = "2";
-    var user = users.removeUser(userId);
+    let userId = "2";
+    let user = users.removeUser(userId);
 
     expect(user.id).toBe(userId);
     expect(users.users.length).toBe(2);
   });
 
   it("should NOT remove a user", () => {
-    var userId = "23";
-    var user = users.removeUser(userId);
+    let userId = "23";
+    let user = users.removeUser(userId);
 
     expect(user).toNotExist();
     expect(users.users.length).toBe(3);
   });
 
   it("should find user by id", () => {
-    var userId = "2";
-    var user = users.getUserById(userId);
+    let userId = "2";
+    let user = users.getUserById(userId);
 
     expect(user.id).toBe(userId);
   });
 
   it("should NOT find user by id ", () => {
-    var userId = "60";
-    var user = users.getUserById(userId);
+    let userId = "60";
+    let user = users.getUserById(userId);
 
     expect(user).toNotExist();
   });
 
   it("should return names for Test1", () => {
-    var userList = users.getUserList("Test1");
+    let userList = users.getUserList("Test1");
+
     expect(userList).toEqual([{
       id: "1",
       name: "luis",
@@ -83,14 +83,14 @@ describe("Users", () => {
   });
 
   it("should return true if name is already in use in a room", () => {
-    var name = "jacob";
-    var room = "Test1";
+    let name = "jacob";
+    let room = "Test1";
 
     expect(users.isNameTaken(name, room)).toBeTruthy();
   });
 
   it("should add a room", () => {
-    var room = "test5";
+    let room = "test5";
     users.addRoom(room);
 
     expect(users.rooms).toEqual({
@@ -101,7 +101,7 @@ describe("Users", () => {
   });
 
   it("should add a participant to a room", () => {
-    var room = "test1";
+    let room = "test1";
     users.addParticipantToRoom(room);
 
     expect(users.rooms).toEqual({
@@ -111,7 +111,7 @@ describe("Users", () => {
   });
 
   it("should remove participant from room", () => {
-    var room = "test1";
+    let room = "test1";
     users.removeParticipantFromRoom(room);
 
     expect(users.rooms).toEqual({
@@ -121,7 +121,7 @@ describe("Users", () => {
   });
 
   it("should remove room if participant count reaches 0", () => {
-    var room = "test2";
+    let room = "test2";
     users.removeParticipantFromRoom(room);
 
     expect(users.rooms).toEqual({
@@ -130,12 +130,8 @@ describe("Users", () => {
   });
 
   it("should return true if room is already taken", () => {
-    var room = "test1";
+    let room = "test1";
 
     expect(users.isRoomTaken(room)).toBeTruthy();
   });
-
-
-
-
 });

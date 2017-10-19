@@ -4,10 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Join | ChatApp</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -18,9 +16,7 @@
       <input type="text" name="name" autofocus autocomplete="off"/>
     </div>
 
-    <div id="rooms" class="form-field">
-      
-    </div>
+    <div id="rooms" class="form-field"></div>
 
     <div id="create-room" class="form-field">
       <label for="room">Create new room</label>
@@ -28,7 +24,12 @@
     </div>
     <button id="join-room">Join</button>
   </form>
+  <!-- JAVASCRIPT - BELOW THIS LINE -->
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <!-- custom scripts -->
   <script src="/js/joinRoom.js"></script>
 </body>
 </html>

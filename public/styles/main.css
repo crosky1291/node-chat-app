@@ -1,3 +1,4 @@
+/* users */
 
 #users {
   background-color: #fff;
@@ -13,14 +14,10 @@
   text-align: center;
 }
 
-
-
-
 .section-right,
 .section-left {
   height: 100vh;
 }
-
 
 /* MESSAGES */
 
@@ -50,8 +47,6 @@ ol>li:after {
   display: table;
   clear: both;
 }
-
-
 
 .message_title h4 {
   margin: 0 0 3px 0;
@@ -122,8 +117,6 @@ ol>li:after {
 }
 
 
-
-
 /* SEND-SECTION */
 
 #form-section {
@@ -144,7 +137,6 @@ ol>li:after {
   display: inline;
 }
 
-
 input[name="message"] {
   padding: 0 10px;
   width: 100%;
@@ -156,9 +148,6 @@ input[name="message"] {
   line-height: normal;
   letter-spacing: 1px;
 }
-
-
-
 
 #input-holder {
   width: calc(100% - 99px);
@@ -199,9 +188,6 @@ input[name="message"] {
   bottom: 1px;
 }
 
-
-
-
 #emojis {
   position: relative;
 }
@@ -225,7 +211,6 @@ input[name="message"] {
   display: none;
 }
 
-
 input[name="message"],
 form>button,
 #send-location {
@@ -239,28 +224,6 @@ button[id="send-location"] {
   color: white;
   border-radius: 10px;
 }
-
-
-.testt {
-  -webkit-appearance: textfield;
-  appearance: textfield;
-  height: 35px;
-  padding: 5px 10px;
-  width: calc(100% - 40px);
-  border: none;
-  outline: none;
-  caret-color: #0943E8;
-  border-radius: 15px;
-  font-size: 16px;
-}
-
-.testt>img {
-  width: 16px;
-  height: 16px;
-  margin: 0 1px;
-}
-
-
 
 button[disabled=disabled] {
   background-color: #7F8995;
@@ -341,11 +304,6 @@ body {
  
 }
 
-.user-right {
-  /* width: 55%; */
-  /* max-width: 60%; */
-}
-
 .user-name {
   display: inline-block;
   font-size: 18px;
@@ -385,6 +343,7 @@ select {
   margin-top: 5px;
 }
 
+/* for tablets and above */
 @media only screen and (min-width: 600px) {
   #mobile-users {
     display: none;
@@ -392,7 +351,7 @@ select {
 }
 
 
-
+/* for desktop and above */
 @media only screen and (min-width: 768px) {
 
   #users {
@@ -406,7 +365,6 @@ select {
   input[name="message"] {
     caret-color: #0943E8;
     letter-spacing: 1px;
-    /* line-height: 35px; */
   }
   
   #input-holder i {
@@ -427,8 +385,4 @@ select {
   #send-message span {
     display: none;
   }
-
-  /* index page */
-  
 }
-

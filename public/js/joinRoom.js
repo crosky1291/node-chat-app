@@ -1,10 +1,8 @@
 (function() {
 
-  (function getRooms() {
+  (function getRooms() { //IIFE
     
-    console.log("hi");
     $.get("/rooms", function(roomList) {
-
       let roomsDiv = $("#rooms");
 
       if (Object.keys(roomList).length > 0) {

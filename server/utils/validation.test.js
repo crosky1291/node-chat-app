@@ -16,5 +16,4 @@ describe("isRealString", () => {
     var res = isRealString("   Yandri   ");
     expect(res).toBe(true);
   });
-
 });

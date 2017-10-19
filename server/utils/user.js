@@ -1,6 +1,5 @@
 const moment = require("moment");
 
-
 let generateUser = (id, name, room) => {
   return {
     id,
@@ -10,4 +9,4 @@ let generateUser = (id, name, room) => {
   };
 };
 
-module.exports = {generateUser};
+module.exports = { generateUser };
