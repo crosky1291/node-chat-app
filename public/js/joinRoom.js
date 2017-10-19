@@ -7,14 +7,14 @@
 
       let roomsDiv = $("#rooms");
 
-      if (roomList.length > 0) {
+      if (Object.keys(roomList).length > 0) {
         let label = $("<label for='roomToJoin'>Join a room</label>");
         let selectField = $("<select name='roomToJoin' form='join-chat'><option value=''></option></select>");
-  
-        roomList.forEach(function(roomName) {
+        
+        for (var roomName in roomList) {
           let option = $(`<option value="${roomName}">${roomName}</option>`);
           selectField.append(option);
-        });
+        };
 
         roomsDiv.append(label, selectField);
       } else {

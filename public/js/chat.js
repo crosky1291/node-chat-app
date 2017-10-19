@@ -4,13 +4,14 @@ var thisUser;
 socket.on("connect", function() {
 
   let params = jQuery.deparam(window.location.search);
-
+  params.name = capitalize(params.name);
+  
   socket.emit("join", params, function(err) {
     if (err) {
       alert(err);
       window.location.href = "/";
     } else {
-      thisUser = capitalize(params.name);
+      thisUser = params.name;
     }
   });
 });

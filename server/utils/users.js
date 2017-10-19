@@ -7,7 +7,7 @@
 class Users {
   constructor() {
     this.users = [];
-    this.rooms = [];
+    this.rooms = {};
   }
 
   addUser(user) {
@@ -15,19 +15,44 @@ class Users {
     return user;
   }
 
-  addRoom(room) {
-    this.rooms.push(room);
-    return room;
+  addRoom(roomName) {
+    roomName = roomName.toLowerCase();
+    this.rooms[roomName] = 1;
   }
 
-  findRoom(name) {
-    return this.rooms.filter((roomName) => {
-      return roomName.toLowerCase() === name.toLowerCase();
-    })[0];
+  addParticipantToRoom(roomName) {
+    roomName = roomName.toLowerCase();
+    this.rooms[roomName]++;
+  }
+
+  removeParticipantFromRoom(roomName) {
+    roomName = roomName.toLowerCase();
+    this.rooms[roomName]--;
+  
+    if (this.rooms[roomName] === 0) {
+      this.deleteRoom(roomName);
+    }
+  }
+
+  deleteRoom(roomName) {
+    roomName = roomName.toLowerCase();
+    delete this.rooms[roomName];
   }
 
   getRoomList() {
     return this.rooms;
+  }
+
+  isRoomTaken(roomName) {
+    roomName = roomName.toLowerCase();
+    return this.rooms.hasOwnProperty(roomName);
+
+    // var isTaken = false;
+    // this.rooms.forEach(function(room) {
+    //   if(roomName.toLowerCase() === room.toLowerCase()) isTaken = true;
+    // });
+
+    // return isTaken;
   }
 
   removeUser(id) {
@@ -55,15 +80,6 @@ class Users {
       return user.name.toLowerCase() === name.toLowerCase();
     })[0];
 
-  }
-
-  isRoomTaken(roomName) {
-    var isTaken = false;
-    this.rooms.forEach(function(room) {
-      if(roomName.toLowerCase() === room.toLowerCase()) isTaken = true;
-    });
-
-    return isTaken;
   }
 
   getUserList(room) {

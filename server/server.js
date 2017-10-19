@@ -21,10 +21,12 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    // console.log("Client disconnected");
     var user = users.removeUser(socket.id);
-
+    
+   
     if(user) {
+      users.removeParticipantFromRoom(user.room);
       io.to(user.room).emit("updateUserList", users.getUserList(user.room));
       io.to(user.room).emit("newMessage", generateMessage("Admin", `${user.name} has left`))
     }
@@ -32,9 +34,9 @@ io.on("connection", (socket) => {
 
 
   socket.on("join", (params, callback) => {
-    console.log(params);
+    
     let isJoiningRoom = params.roomToJoin ? true : false;
-    let userRoom = isJoiningRoom ? params.roomToJoin : params.room;
+    let userRoom = isJoiningRoom ? params.roomToJoin.toLowerCase() : params.room.toLowerCase();
 
     if (isJoiningRoom) {
       //check name for real string && check name for people in the room so that its not the same name
@@ -52,14 +54,16 @@ io.on("connection", (socket) => {
       }
     }
 
-    let user = generateUser(socket.id, capitalize(params.name), userRoom);
+    let user = generateUser(socket.id, params.name, userRoom);
     socket.join(user.room);
     
     users.removeUser(user.id);
     users.addUser(user);
     
-    if (!users.findRoom(user.room)) {
+    if (!users.isRoomTaken(user.room)) {
       users.addRoom(user.room);
+    } else {
+      users.addParticipantToRoom(user.room);
     }
 
     io.to(user.room).emit("updateUserList", users.getUserList(user.room));
@@ -93,27 +97,6 @@ io.on("connection", (socket) => {
 
 
 });
-
-
-function readFiles(dirname, onFileContent, onError, callback) {
-  fs.readdir(dirname, function(err, filenames) {
-    if (err) {
-      onError(err);
-      return;
-    }
-    filenames.forEach(function(filename) {
-      fs.readFile(dirname + filename, 'utf-8', function(err, content) {
-        if (err) {
-          onError(err);
-          return;
-        }
-        onFileContent(filename, content);
-      });
-    });
-
-    callback();
-  });
-}
 
 
 app.get("/rooms", (req, res) => {

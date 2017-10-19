@@ -7,7 +7,10 @@ describe("Users", () => {
 
   beforeEach(() => {
     users = new Users();
-    users.rooms = ["Test1", "Test2"];
+    users.rooms = {
+      test1: 2, 
+      test2: 1
+    };
     users.users = [{
       id: "1",
       name: "luis",
@@ -86,11 +89,53 @@ describe("Users", () => {
     expect(users.isNameTaken(name, room)).toBeTruthy();
   });
 
+  it("should add a room", () => {
+    var room = "test5";
+    users.addRoom(room);
+
+    expect(users.rooms).toEqual({
+      test1: 2, 
+      test2: 1,
+      test5: 1
+    });
+  });
+
+  it("should add a participant to a room", () => {
+    var room = "test1";
+    users.addParticipantToRoom(room);
+
+    expect(users.rooms).toEqual({
+      test1: 3, 
+      test2: 1,
+    });
+  });
+
+  it("should remove participant from room", () => {
+    var room = "test1";
+    users.removeParticipantFromRoom(room);
+
+    expect(users.rooms).toEqual({
+      test1: 1, 
+      test2: 1,
+    });
+  });
+
+  it("should remove room if participant count reaches 0", () => {
+    var room = "test2";
+    users.removeParticipantFromRoom(room);
+
+    expect(users.rooms).toEqual({
+      test1: 2
+    });
+  });
+
   it("should return true if room is already taken", () => {
-    var room = "TESt1";
+    var room = "test1";
 
     expect(users.isRoomTaken(room)).toBeTruthy();
   });
+
+
 
 
 });
