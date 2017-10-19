@@ -6,7 +6,7 @@ const socketIO = require("socket.io");
 const port = process.env.PORT || 3000;
 const { generateMessage, generateLocationMessage } = require("./utils/message");
 const { generateUser } = require("./utils/user");
-const {isRealString} = require("./utils/validation");
+const {isRealString, capitalize} = require("./utils/validation");
 const {Users} = require("./utils/users");
 
 const publicPath = path.join(__dirname, "../public");
@@ -19,7 +19,6 @@ var users = new Users();
 app.use(express.static(publicPath));
 
 io.on("connection", (socket) => {
-  console.log("New user connected");
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
@@ -53,14 +52,12 @@ io.on("connection", (socket) => {
       }
     }
 
-
-
-    let user = generateUser(socket.id, params.name, userRoom);
+    let user = generateUser(socket.id, capitalize(params.name), userRoom);
     socket.join(user.room);
     
     users.removeUser(user.id);
     users.addUser(user);
-    console.log(!users.findRoom(user.room));
+    
     if (!users.findRoom(user.room)) {
       users.addRoom(user.room);
     }
@@ -68,7 +65,7 @@ io.on("connection", (socket) => {
     io.to(user.room).emit("updateUserList", users.getUserList(user.room));
 
     socket.emit("newMessage", generateMessage("Admin", "Welcome to the chat app"));
-    socket.broadcast.to(params.room).emit("newMessage", generateMessage("Admin", `${user.name} has joined`));
+    socket.broadcast.to(userRoom).emit("newMessage", generateMessage("Admin", `${user.name} has joined`));
 
 
     callback();

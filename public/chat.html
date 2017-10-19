@@ -36,7 +36,11 @@
             </ol>
         </section>
       </div>
-      
+
+      <div id="mobile-users">
+        <i class="fa fa-users"></i>
+      </div>
+
       <div class="section-right col-lg-10 col-sm-9 no-padding-left-right">
         <section id="messages">
           <ol id="message-display"></ol>
@@ -89,12 +93,14 @@
 
   <script id="location-message-template" type="text/template">
     <li>
-      <div class="message_title">
-        <h4>{{from}}</h4>
-        <span>{{createdAt}}</span>
-      </div>
-      <div class="message_body">
-        <p><a href="{{url}}" target="_blank">My current location</a></p>
+      <div class="message-wrap {{class}}">
+        <div class="message_title">
+          <h4>{{from}}</h4>
+        </div>
+        <div class="message_body">
+          <p><a href="{{url}}" target="_blank">My current location</a></p>
+          <span class="created_at">{{createdAt}}</span>
+        </div>
       </div>
     </li>
   </script>

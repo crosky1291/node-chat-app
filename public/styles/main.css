@@ -27,7 +27,7 @@
 #messages {
   background-image: url("../images/chatbg.jpg");
   background-size: fill;
-  height: 100%;
+  height: calc(100% - 54px);
   padding-top: 20px;
   overflow-y: scroll;
 }
@@ -42,11 +42,19 @@ ol {
 }
 
 ol>li {
-  margin-top: 2px;
+  margin-top: 5px;
 }
 
+ol>li:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
 .message_title h4 {
-  margin: 0;
+  margin: 0 0 3px 0;
 }
 .message_body {
   position: relative;
@@ -64,10 +72,26 @@ ol>li {
 
 .chat-me {
   background-color: #D0FFBD;
+  position: relative;
+  float: right;
+  margin-right: 10px;
 }
 
 .chat-others {
   background-color: #fff;
+}
+
+.chat-others h4 {
+  color: #0943E8;
+}
+
+.chat-admin {
+  background-color: #fff;
+}
+
+.chat-admin h4 {
+  color: #f00;
+  font-size: 20px;
 }
 
 .created_at {
@@ -76,6 +100,27 @@ ol>li {
   position: absolute;
   right: -10px;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+#mobile-users {
+  background-color: #0943E8;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  position: fixed;
+  right: 10px;
+  top: 15px;
+  z-index: 99;
+}
+
+#mobile-users i {
+  font-size: 25px;
+  color: #fff;
+}
+
 
 
 
@@ -340,8 +385,10 @@ select {
   margin-top: 5px;
 }
 
-@media only screen and (min-width: 768px) {
-
+@media only screen and (min-width: 600px) {
+  #mobile-users {
+    display: none;
+  }
 }
 
 

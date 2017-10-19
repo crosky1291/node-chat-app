@@ -1,7 +1,7 @@
 let socket = io(); //makes a request from the client to the server to open a websocket
+var thisUser;
 
 socket.on("connect", function() {
-  console.log("Connected to server");
 
   let params = jQuery.deparam(window.location.search);
 
@@ -10,7 +10,7 @@ socket.on("connect", function() {
       alert(err);
       window.location.href = "/";
     } else {
-      console.log("everything was ok");
+      thisUser = capitalize(params.name);
     }
   });
 });
@@ -22,10 +22,20 @@ socket.on("disconnect", function() {
 socket.on("newMessage", function(message) {
   let timeStamp = moment(message.createdAt).format("h:mm A");
   let template = $("#message-template").html();
+  var whosMessageClass;
+
+  if (message.from === "Admin") {
+    whosMessageClass = "chat-admin";
+  } else if (message.from === thisUser) {
+    whosMessageClass = "chat-me";
+  } else {
+    whosMessageClass = "chat-others";
+  }
+
 
   let html = Mustache.render(template, {
     text: message.text,
-    class: "chat-me",
+    class: whosMessageClass,
     from: message.from,
     createdAt: timeStamp
   });
@@ -34,12 +44,13 @@ socket.on("newMessage", function(message) {
 });
 
 socket.on("newLocationMessage", function(message) {
-  let timeStamp = moment(message.createdAt).format("h:mm a");
+  let timeStamp = moment(message.createdAt).format("h:mm A");
   let template = $("#location-message-template").html();
 
   let html = Mustache.render(template, {
     url: message.url,
     from: message.from,
+    class: "chat-me",
     createdAt: timeStamp
   });
 
@@ -55,7 +66,7 @@ socket.on("updateUserList", function(list) {
     let timeStamp = moment(user.joinedAt).format("h:mm A");
 
     let html = Mustache.render(template, {
-      name: capitalize(user.name),
+      name: user.name,
       joinedAt: timeStamp
     });
 
@@ -65,7 +76,8 @@ socket.on("updateUserList", function(list) {
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};
+
 
 
 let messageTextbox = $("input[name=message]");
@@ -74,7 +86,6 @@ $("#message-form").on("submit", function(e) {
   e.preventDefault();
 
   socket.emit("createMessage", {
-    from: "User",
     text: messageTextbox.val()
   }, function() {
     messageTextbox.val("").focus();
@@ -171,4 +182,18 @@ getPeopleEmoji();
 if (window.innerWidth > 768) {
   $("#send-location").removeClass("fa fa-map-marker").text("Send Location");
 }
+
+$("#mobile-users").on("click", function(e) {
+  $("#users").toggle(400);
+  $(".section-right").toggle(400);
+  var iElement = $("#mobile-users i");
+  var hasUserClass = iElement.hasClass("fa-users");
+
+  if (hasUserClass) {
+    iElement.removeClass("fa-users").addClass("fa-commenting-o");
+
+  } else {
+    iElement.removeClass("fa-commenting-o").addClass("fa-users");
+  }
+});
 
