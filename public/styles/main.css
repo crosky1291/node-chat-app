@@ -254,6 +254,13 @@ body {
 #join-chat h2 {
   text-align: center;
   color: #0943E8;
+  margin-bottom: 0;
+}
+
+#join-chat>p {
+  text-align: center;
+  color: #0943E8;
+  margin-top: 10px;
 }
 
 .form-field {
