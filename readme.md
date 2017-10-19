@@ -1,4 +1,4 @@
-#WhatsApp inspired Chat APP using Node and Socket.io
+# WhatsApp inspired Chat APP using Node and Socket.io
 
 Includes some tests, and is mobile friendly as well.
 
