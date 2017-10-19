@@ -2,14 +2,14 @@
 
 Includes some tests, and is mobile friendly as well.
 
-#Start the app: npm start
-#Test the app: npm test
+# Start the app: npm start
+# Test the app: npm test
 
 The app is deployed at: https://agile-scrubland-39456.herokuapp.com
 
 To use to app open 2 or more browser tabs to simulate users
 
-#App features
+# App features
 1. App has emoji support.
 2. Users can share their gps locations.
 3. App displays active chat rooms.
