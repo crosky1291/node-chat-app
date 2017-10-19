@@ -132,7 +132,7 @@ locationButton.on("click", function() {
 
 
 
-$("#emoji-container").on("click", function(e) {
+$("#emoji-container").on("click", ".emoji", function(e) {
   let value = $(e.target).html();
   var input = $("#message-field");
   input.val(input.val() + value + " ").focus();
